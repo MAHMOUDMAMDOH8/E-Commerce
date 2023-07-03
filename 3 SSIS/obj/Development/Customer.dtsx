@@ -1,0 +1,1674 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/24/2023 3:33:59 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-J839N2N"
+  DTS:CreatorName="DESKTOP-J839N2N\MAHMOUD"
+  DTS:DTSID="{116FB454-744E-4EA7-AF95-7F8E7CFFD85F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5131.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{865FC95E-0439-47D1-85E7-A1F902A2DEBC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{68970C87-94F0-403D-A30F-FF5B2CE64A6B}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=D:\Training Project\Full\Big Data\Book1.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.E-Commerce]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3FB1CD3B-4442-4D2A-89D7-65629E42DFD4}"
+      DTS:ObjectName="LocalHost.E-Commerce">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=E-Commerce;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{3FB1CD3B-4442-4D2A-89D7-65629E42DFD4}LocalHost.E-Commerce;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.EcomDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7E2B7324-8FD0-4E07-ABA9-8EB731B605E7}"
+      DTS:ObjectName="LocalHost.EcomDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=EcomDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{7E2B7324-8FD0-4E07-ABA9-8EB731B605E7}LocalHost.EcomDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4272DD05-DC30-4E03-94C1-69B06202CC13}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\concatname"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="concatname"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\concatname.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\concatname.Inputs[Derived Column Input].Columns[fname]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="fname"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[fname]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\concatname.Inputs[Derived Column Input].Columns[lname]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="lname"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[lname]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\concatname.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\concatname.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\concatname.Outputs[Derived Column Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="101"
+                      lineageId="Package\Data Flow Task\concatname.Outputs[Derived Column Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[fname]} + " " + #{Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[lname]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">fname + " " + lname</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\concatname.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\concatname.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\concatname.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\concatname.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\concatname.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\concatname.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Customer"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Customer"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[customers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Customer.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.E-Commerce]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.E-Commerce]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[fname]"
+                      codePage="1256"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[fname]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[fname]"
+                      name="fname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[lname]"
+                      codePage="1256"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[lname]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[lname]"
+                      name="lname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[gender]"
+                      codePage="1256"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[gender]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[gender]"
+                      name="gender"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      dataType="i4"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[fname]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      name="fname" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[lname]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      name="lname" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[gender]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      name="gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[zip_code]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      name="zip_code" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[age]"
+                      dataType="i4"
+                      name="age" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[password]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      name="password" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[email]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      name="email" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].ExternalColumns[account_id]"
+                      dataType="i4"
+                      name="account_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[fname]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[fname]"
+                      name="fname" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[lname]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[lname]"
+                      name="lname" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[gender]"
+                      codePage="1256"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Error Output].Columns[gender]"
+                      name="gender" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Excel Destination"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">cus</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of customer_id]"
+                      cachedDataType="i4"
+                      cachedName="Copy of customer_id"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of customer_id]"
+                      lineageId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output].Columns[Copy of customer_id]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of Name]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Copy of Name"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of Name]"
+                      lineageId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output].Columns[Copy of Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[Copy of gender]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of gender"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of gender]"
+                      lineageId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output].Columns[Copy of gender]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[Copy of customer_id]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of customer_id" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\match data type"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="match data type"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\match data type.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\match data type.Inputs[Data Conversion Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="Name"
+                      lineageId="Package\Data Flow Task\concatname.Outputs[Derived Column Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\match data type.Inputs[Data Conversion Input].Columns[gender]"
+                      cachedCodepage="1256"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="gender"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[gender]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\match data type.Inputs[Data Conversion Input].Columns[customer_id]"
+                      cachedDataType="i4"
+                      cachedName="customer_id"
+                      lineageId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[customer_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data Flow Task\match data type.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output].Columns[Copy of Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="60"
+                      lineageId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output].Columns[Copy of Name]"
+                      name="Copy of Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\concatname.Outputs[Derived Column Output].Columns[Name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output].Columns[Copy of gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output].Columns[Copy of gender]"
+                      name="Copy of gender"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[gender]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output].Columns[Copy of customer_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output].Columns[Copy of customer_id]"
+                      name="Copy of customer_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Customer.Outputs[OLE DB Source Output].Columns[customer_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\match data type.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data Flow Task\match data type.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\match data type.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\match data type.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\match data type.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\match data type.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Data Conversion Output]"
+              endId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Data Flow Task\match data type.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\match data type.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\concatname.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\concatname.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\Customer.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task 1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9F39290C-632B-4E5F-BE0F-D300E0F879DE}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task 1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task 1\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task 1\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion.Inputs[Data Conversion Input].Columns[Copy of customer_id]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of customer_id"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of customer_id]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion.Inputs[Data Conversion Input].Columns[Copy of Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of Name"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion.Inputs[Data Conversion Input].Columns[Copy of gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of gender"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of gender]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data Flow Task 1\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID]"
+                      name="CustomerID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of customer_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="60"
+                      lineageId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of Name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of gender]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data Flow Task 1\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task 1\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">cus</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].ExternalColumns[Copy of Name]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of Name]"
+                      name="Copy of Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].ExternalColumns[Copy of gender]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of gender]"
+                      name="Copy of gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of customer_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].ExternalColumns[Copy of customer_id]"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of customer_id]"
+                      name="Copy of customer_id"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].ExternalColumns[Copy of Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].ExternalColumns[Copy of gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].ExternalColumns[Copy of customer_id]"
+                      dataType="wstr"
+                      length="255"
+                      name="Copy of customer_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[Copy of Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[Copy of Name]"
+                      name="Copy of Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[Copy of gender]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[Copy of gender]"
+                      name="Copy of gender" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[Copy of customer_id]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[Copy of customer_id]"
+                      name="Copy of customer_id" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task 1\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dimcastomers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task 1\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.EcomDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.EcomDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      lineageId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="60"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Gender]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      dataType="i4"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Gender" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task 1\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task 1\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Sort.Inputs[Sort Input].Columns[Copy of Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of Name"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of Name]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Sort.Inputs[Sort Input].Columns[Copy of gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of gender"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of gender]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Sort.Inputs[Sort Input].Columns[Copy of customer_id]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Copy of customer_id"
+                      lineageId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of customer_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Sort.Inputs[Sort Input].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      lineageId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Sort.Inputs[Sort Input].Columns[Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="60"
+                      cachedName="Name"
+                      lineageId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[Name]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Sort.Inputs[Sort Input].Columns[Gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Gender"
+                      lineageId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[Gender]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task 1\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Copy of Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Copy of Name]"
+                      name="Copy of Name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of Name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Copy of gender]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Copy of gender]"
+                      name="Copy of gender">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of gender]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Copy of customer_id]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Copy of customer_id]"
+                      name="Copy of customer_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output].Columns[Copy of customer_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[CustomerID]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[CustomerID]"
+                      name="CustomerID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      lineageId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Name]"
+                      name="Name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[Name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Data Flow Task 1\Sort.Outputs[Sort Output].Columns[Gender]"
+                      name="Gender">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output].Columns[Gender]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task 1.Paths[Data Conversion Output]"
+              endId="Package\Data Flow Task 1\Sort.Inputs[Sort Input]"
+              name="Data Conversion Output"
+              startId="Package\Data Flow Task 1\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Data Flow Task 1.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task 1\Data Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task 1\Excel Source.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Data Flow Task 1.Paths[Sort Output]"
+              endId="Package\Data Flow Task 1\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Sort Output"
+              startId="Package\Data Flow Task 1\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DD9AF9E4-89FD-4514-81D1-B56B60174BC4}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Data Flow Task"
+          TopLeft="259.285714837666,77.2352940499473" />
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\Data Flow Task 1"
+          TopLeft="267.142857711534,180.470588077105" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="334.485714837666,118.835294049947">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.6571428738687,61.6352940271573"
+              Start="0,0"
+              End="12.6571428738687,54.1352940271573">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.8176470135787" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.8176470135787"
+                    Point2="0,30.8176470135787"
+                    Point3="4,30.8176470135787" />
+                  <mssgle:LineSegment
+                    End="8.65714287386868,30.8176470135787" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.65714287386868,30.8176470135787"
+                    Point2="12.6571428738687,30.8176470135787"
+                    Point3="12.6571428738687,34.8176470135787" />
+                  <mssgle:LineSegment
+                    End="12.6571428738687,54.1352940271573" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="123.2,41.6"
+          Id="Package\Data Flow Task\Customer"
+          TopLeft="80.7142858861052,33.6470587940365" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Data Flow Task\match data type"
+          TopLeft="570.714286929187,32.1176470306712" />
+        <NodeLayout
+          Size="135.2,41.6"
+          Id="Package\Data Flow Task\concatname"
+          TopLeft="289.285714901528,32.8823529123538" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="203.914285886105,54.0647058531952">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="85.3714290154226,0"
+              Start="0,0"
+              End="77.8714290154226,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="77.8714290154226,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="424.485714901528,53.2999999715125">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="146.228572027659,0"
+              Start="0,0"
+              End="138.728572027659,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="138.728572027659,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\Data Flow Task\Excel Destination"
+          TopLeft="574.285715508218,153.705882218212" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="651.100001218702,73.7176470306712">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,79.9882351875408"
+              Start="0,0"
+              End="0,72.4882351875408">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.4882351875408" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Customer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Flow Task 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="138.4,41.6"
+          Id="Package\Data Flow Task 1\Excel Source"
+          TopLeft="219.999996721745,23.9999996423721" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Data Flow Task 1\Data Conversion"
+          TopLeft="402.999993994832,91.9999986290932" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Data Flow Task 1\OLE DB Destination"
+          TopLeft="391.999994158745,301.999995499849" />
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[Excel Source Output]"
+          TopLeft="289.199996721745,65.5999996423721">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="191.399997273087,26.399998986721"
+              Start="0,0"
+              End="191.399997273087,18.899998986721">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.19999949336052" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.19999949336052"
+                    Point2="0,13.1999994933605"
+                    Point3="4,13.1999994933605" />
+                  <mssgle:LineSegment
+                    End="187.399997273087,13.1999994933605" />
+                  <mssgle:CubicBezierSegment
+                    Point1="187.399997273087,13.1999994933605"
+                    Point2="191.399997273087,13.1999994933605"
+                    Point3="191.399997273087,17.1999994933605" />
+                  <mssgle:LineSegment
+                    End="191.399997273087,18.899998986721" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\Data Flow Task 1\Sort"
+          TopLeft="417.999993771315,180.99999730289" />
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[Data Conversion Output]"
+          TopLeft="480.599993994832,133.599998629093">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-13.8000002235172,47.3999986737967"
+              Start="0,0"
+              End="-13.8000002235172,39.8999986737967">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.6999993368983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.6999993368983"
+                    Point2="0,23.6999993368983"
+                    Point3="-4,23.6999993368983" />
+                  <mssgle:LineSegment
+                    End="-9.8000002235172,23.6999993368983" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-9.8000002235172,23.6999993368983"
+                    Point2="-13.8000002235172,23.6999993368983"
+                    Point3="-13.8000002235172,27.6999993368983" />
+                  <mssgle:LineSegment
+                    End="-13.8000002235172,39.8999986737967" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[Sort Output]"
+          TopLeft="466.799993771315,222.59999730289">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.4000003874298,79.3999981969594"
+              Start="0,0"
+              End="10.4000003874298,71.8999981969594">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.6999990984797" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.6999990984797"
+                    Point2="0,39.6999990984797"
+                    Point3="4,39.6999990984797" />
+                  <mssgle:LineSegment
+                    End="6.40000038742983,39.6999990984797" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.40000038742983,39.6999990984797"
+                    Point2="10.4000003874298,39.6999990984797"
+                    Point3="10.4000003874298,43.6999990984797" />
+                  <mssgle:LineSegment
+                    End="10.4000003874298,71.8999981969594" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
